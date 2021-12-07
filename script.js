@@ -17,8 +17,7 @@ $(".cella").click(function () {
     } else {
         $(this).removeClass("bg-secondary");
         $(this).addClass("bg-success");
-        $(this).removeClass("border-primary");
-        $(this).removeClass("badge bg-primary text-wrap");
+        $(this).removeClass("border-primary");        
         $(this).html('');
         $(this).attr("data-busy", "false");
     }
@@ -76,7 +75,7 @@ $("#salva1").click(function () {
     if((nome!="")&&(prezzo!="")){
         $(".cella").each(function () {
             if (($(this).hasClass("bg-secondary")==true)&&($(this).attr("id").indexOf("sx")!=-1)&&($(this).attr("data-busy")=="false")) {
-                $(this).html(nome +"<br>"+ prezzo).addClass("badge bg-primary text-wrap");
+                $(this).html(nome +"<br>"+ prezzo +" €");
                 $(this).attr("data-busy", "true");
             }
         });
@@ -97,7 +96,7 @@ $("#salva2").click(function () {
     if((nome!="")&&(prezzo!="")){
         $(".cella").each(function () {                
             if (($(this).hasClass("bg-secondary")==true)&&($(this).attr("id").indexOf("dx")!=-1)) {
-                $(this).html(nome +" "+ prezzo).addClass("badge bg-primary text-wrap");
+                $(this).html(nome +"<br>"+ prezzo +" €");
                 $(this).attr("date-busy","true");
             }
         });
@@ -110,14 +109,14 @@ $("#salva2").click(function () {
 
 
 $("#salvaTutto").click(function () {        
-    var mese = $("#mese").val();    
+    var mese = $("#mese").val();
     if (mese!="") {
+        $(".modal").modal("hide");
         html2canvas(document.getElementById("printable"), {scale: 1}).then(canvas => {             
             canvas.toBlob(function(blob){
                 saveAs(blob,mese+".png");
             },"image/png");
-        });                
-        $(".modal").modal("hide");
+        });                        
     } else {
         $("#checkmese").html("Inserisci il nome del mese!").fadeIn(500).delay(2000).fadeOut(500);        
     }
