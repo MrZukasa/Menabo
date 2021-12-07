@@ -12,19 +12,20 @@ $(".cella").click(function () {
 
     if ($(this).hasClass("bg-success")==true) {
         $(this).removeClass("bg-success");
-        $(this).addClass("bg-dark");
-        $(this).addClass("border-warning"); 
+        $(this).addClass("bg-secondary");
+        $(this).addClass("border-primary");
     } else {
-        $(this).removeClass("bg-dark");
+        $(this).removeClass("bg-secondary");
         $(this).addClass("bg-success");
-        $(this).removeClass("border-warning");
+        $(this).removeClass("border-primary");
+        $(this).removeClass("badge bg-primary text-wrap");
         $(this).html('');
         $(this).attr("data-busy", "false");
     }
 
     $(".cella").each(function() {
         if($(this).attr("id").indexOf("sx")!=-1){
-            if (($(this).hasClass("bg-dark")==true)) {
+            if (($(this).hasClass("bg-secondary")==true)) {
                 $("#scrivi1").prop('disabled',false);
                 return false;
             } else {
@@ -34,7 +35,7 @@ $(".cella").click(function () {
     }); 
     $(".cella").each(function() {
         if($(this).attr("id").indexOf("dx")!=-1){
-            if (($(this).hasClass("bg-dark")==true)) {
+            if (($(this).hasClass("bg-secondary")==true)) {
                 $("#scrivi2").prop('disabled',false);
                 return false;
             } else {
@@ -48,7 +49,7 @@ $("#scrivi1").click(function () {
 
     $(".cella").each(function () {
         var temp=$(this).attr("id");        
-        if (($(this).hasClass("bg-dark")==true)&&(temp.indexOf("sx")!=-1)) {
+        if (($(this).hasClass("bg-secondary")==true)&&(temp.indexOf("sx")!=-1)) {
             console.log($(this).attr("id"));
         }
     })
@@ -59,7 +60,7 @@ $("#scrivi2").click(function () {
 
     $(".cella").each(function () {
         var temp=$(this).attr("id");        
-        if (($(this).hasClass("bg-dark")==true)&&(temp.indexOf("dx")!=-1)) {
+        if (($(this).hasClass("bg-secondary")==true)&&(temp.indexOf("dx")!=-1)) {
             console.log($(this).attr("id"));
         }        
     })
@@ -74,8 +75,8 @@ $("#salva1").click(function () {
     
     if((nome!="")&&(prezzo!="")){
         $(".cella").each(function () {
-            if (($(this).hasClass("bg-dark")==true)&&($(this).attr("id").indexOf("sx")!=-1)&&($(this).attr("data-busy")=="false")) {
-                $(this).html(nome +" "+ prezzo);
+            if (($(this).hasClass("bg-secondary")==true)&&($(this).attr("id").indexOf("sx")!=-1)&&($(this).attr("data-busy")=="false")) {
+                $(this).html(nome +"<br>"+ prezzo).addClass("badge bg-primary text-wrap");
                 $(this).attr("data-busy", "true");
             }
         });
@@ -95,8 +96,9 @@ $("#salva2").click(function () {
 
     if((nome!="")&&(prezzo!="")){
         $(".cella").each(function () {                
-            if (($(this).hasClass("bg-dark")==true)&&($(this).attr("id").indexOf("dx")!=-1)) {
-                $(this).html(nome +" "+ prezzo);
+            if (($(this).hasClass("bg-secondary")==true)&&($(this).attr("id").indexOf("dx")!=-1)) {
+                $(this).html(nome +" "+ prezzo).addClass("badge bg-primary text-wrap");
+                $(this).attr("date-busy","true");
             }
         });
         $(".modal").modal("hide");
